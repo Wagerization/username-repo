@@ -1,17 +1,16 @@
 function gitRepo(){
     let username = $('#userchose').val();
-    fetch(`https://api.github.com/users/:username/repos`)
+    fetch(`application/vnd.github.v3+json/users/:${username}/repos`)
     .then( response => response.json())
     .then(response => {
         for(let i = 0; i < responsejson; i++){
             $('.results').prepend(`<ul><li>${responseJson[i]}</li></ul>`)
         }
     })
-    .catch( error => console.logs('something went wrong '))
 }
 
 function clickForm(){
-    $('#submit').submit( event =>{
+    $('.js-form').submit( event =>{
         event.preventDefault();
         gitRepo();
     });
