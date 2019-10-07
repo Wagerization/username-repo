@@ -1,12 +1,17 @@
 function gitRepo(){
     let username = $('#userchose').val();
-    fetch(`application/vnd.github.v3+json/users/:${username}/repos`)
+    fetch(`https://api.github.com/users/${username}/repos`)
     .then( response => response.json())
-    .then(response => {
-        for(let i = 0; i < responsejson; i++){
-            $('.results').prepend(`<ul><li>${responseJson[i]}</li></ul>`)
-        }
-    })
+    .then(responseJson => displayRepos(responseJson))
+}
+
+function displayRepos(list){
+    $('.results').empty();
+    for( let i = 0; i < list.length; i++){
+    // console.log(list[i].name)
+    // console.log(list[i].html_url)
+    $('.results').prepend(`<div><a href='${list[i].html_url}'>${list[i].name}</a>  </div>`).addClass('active');
+    }
 }
 
 function clickForm(){
@@ -15,3 +20,7 @@ function clickForm(){
         gitRepo();
     });
 }
+
+$(function(){
+    clickForm();
+});

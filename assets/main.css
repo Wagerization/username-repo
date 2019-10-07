@@ -6,3 +6,7 @@
 .active{
     display: block;
 }
+
+.results a{
+    padding: 5px;
+}
